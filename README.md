@@ -1,4 +1,4 @@
-# Evaluación 2: clasificación de letras ASL con CNN y comparación con MLP
+  # Evaluación 2: clasificación de letras ASL con CNN y comparación con MLP
 
 **Asignatura:** Técnicas Avanzadas de Machine Learning (TLY1102)  
 **Sección:** 001D  
@@ -31,12 +31,13 @@ El ejemplo docente trabaja con CIFAR-10, por lo que se adaptaron dimensiones, ca
 Fuente: Sign Language MNIST, archivos aportados por el grupo. Dataset original: 27.455 train y 7.172 test, 784 intensidades y una etiqueta. Contiene 24 letras estáticas y excluye J y Z. Se filtran 6.902 imágenes del train oficial y 1.797 del test oficial.
 
 | Letra | Original | Codificada | Train | Validacion | Test |
-| A     | 0        |  0         | 901   |  225       |  331 |
-| C     | 2        |  1         | 915   |  229       |  310 |
-| F     | 5        | 2          | 963   | 241        | 247 |
-| K     | 10       | 3          | 891   | 223        | 331 |
-| O     | 14       | 4          | 957   | 239        | 246 |
-| Y     | 24       | 5          | 894   | 224        | 332 |
+|---|---|---|---|---|---|
+| A | 0 | 0 | 901 | 225 | 331 |
+| C | 2 | 1 | 915 | 229 | 310 |
+| F | 5 | 2 | 963 | 241 | 247 |
+| K | 10 | 3 | 891 | 223 | 331 |
+| O | 14 | 4 | 957 | 239 | 246 |
+| Y | 24 | 5 | 894 | 224 | 332 |
 
 ![Ejemplos de las seis clases](images/clases.png)
 
@@ -57,16 +58,16 @@ La partición `train_test_split(test_size=0.20, random_state=42, stratify=y)` pr
 
 **CNN:** dos bloques Conv2D + MaxPooling2D. Primer bloque: 16 filtros 3×3, stride 1, padding `valid`, ReLU. Segundo: 32 filtros 3×3, misma configuración. Cada pooling usa ventana y stride 2×2. Salida Flatten, Dense 64 ReLU, Dense 6 Softmax.
 
-| Capa          | Salida por imagen   | Parámetros |
-
-| Entrada       | 28×28×1             | 0 |
-| Conv2D 16, 3×3| 26×26×16            | (3×3×1+1)×16 = 160 |
-| MaxPooling2D  | 13×13×16            | 0 |
-| Conv2D 32, 3×3| 11×11×32            | (3×3×16+1)×32 = 4.640 |
-| MaxPooling2D  | 5×5×32              | 0 |
-| Flatten       | 800                 | 0 |
-| Dense 64      | 64                  | (800+1)×64 = 51.264 |
-| Dense 6       | 6                   | (64+1)×6 = 390 |
+| Capa | Salida por imagen | Parámetros |
+|---|---|---:|
+| Entrada | 28×28×1 | 0 |
+| Conv2D 16, 3×3 | 26×26×16 | (3×3×1+1)×16 = 160 |
+| MaxPooling2D | 13×13×16 | 0 |
+| Conv2D 32, 3×3 | 11×11×32 | (3×3×16+1)×32 = 4.640 |
+| MaxPooling2D | 5×5×32 | 0 |
+| Flatten | 800 | 0 |
+| Dense 64 | 64 | (800+1)×64 = 51.264 |
+| Dense 6 | 6 | (64+1)×6 = 390 |
 | **Total CNN** | **6 probabilidades** | **56.454** |
 
 Filtros 3×3 detectan patrones locales con pocos pesos. El segundo bloque combina respuestas previas. MaxPooling conserva la mayor activación local, reduce dimensiones y aporta cierta tolerancia a desplazamientos, sin asegurar invariancia absoluta. `valid` evita bordes artificiales y mantiene suficiente resolución. ReLU introduce no linealidad y produce cero para entradas negativas. Flatten conecta mapas y clasificador. Softmax normaliza seis puntajes.
@@ -85,19 +86,20 @@ La exactitud de validación perfecta no demuestra ausencia de sobreajuste. En te
 
 ## 6. Evaluación y comparación cuantitativa
 
-| Indicador     |  MLP reentrenado  | CNN |
-| Accuracy test |       0.8781      | 0.9727 |
-| Precision macro |     0.8836      | 0.9739 |
-| Recall macro  |       0.8776      | 0.9694 |
-| F1 macro      |       0.8780      | 0.9706 |
-| F1 ponderado  |       0.8780      | 0.9723 |
-| Loss test     |       0.5407      | 0.0799 |
-| Parámetros    |      109126.0000  | 56454.0000 |
-| Entrenamiento (s)|   23.8483      | 26.9969 |
-| Errores       |      219.0000     | 49.0000 |
-| Brecha train-test (pp)| 12.1870   | 2.7268 |
-| Latencia mediana (ms)|  2.2328    | 4.7090 |
-| Latencia p95 (ms)|    3.9108      | 6.0583 |
+| Indicador | MLP reentrenado | CNN |
+|---|---|---|
+| Accuracy test | 0.8781 | 0.9727 |
+| Precision macro | 0.8836 | 0.9739 |
+| Recall macro | 0.8776 | 0.9694 |
+| F1 macro | 0.8780 | 0.9706 |
+| F1 ponderado | 0.8780 | 0.9723 |
+| Loss test | 0.5407 | 0.0799 |
+| Parámetros | 109126.0000 | 56454.0000 |
+| Entrenamiento (s) | 23.8483 | 26.9969 |
+| Errores | 219.0000 | 49.0000 |
+| Brecha train-test (pp) | 12.1870 | 2.7268 |
+| Latencia mediana (ms) | 2.2328 | 4.7090 |
+| Latencia p95 (ms) | 3.9108 | 6.0583 |
 
 ![Comparación de métricas y recursos](images/comparacion.png)
 
@@ -108,12 +110,13 @@ La CNN elimina **170 de los 219 errores del MLP actual**, una reducción relativ
 ### Desempeño por clase de la CNN
 
 | Clase | precision | recall | f1-score | support |
-| A     | 1.0000    | 1.0000 | 1.0000 | 331.0000 |
-| C     | 1.0000    | 1.0000 | 1.0000 | 310.0000 |
-| F     | 0.9464    | 1.0000 | 0.9724 | 247.0000 |
-| K     | 0.9405    | 0.9547 | 0.9475 | 331.0000 |
-| O     | 1.0000    | 0.8618 | 0.9258 | 246.0000 |
-| Y     | 0.9568    | 1.0000 | 0.9779 | 332.0000 |
+|---|---|---|---|---|
+| A | 1.0000 | 1.0000 | 1.0000 | 331.0000 |
+| C | 1.0000 | 1.0000 | 1.0000 | 310.0000 |
+| F | 0.9464 | 1.0000 | 0.9724 | 247.0000 |
+| K | 0.9405 | 0.9547 | 0.9475 | 331.0000 |
+| O | 1.0000 | 0.8618 | 0.9258 | 246.0000 |
+| Y | 0.9568 | 1.0000 | 0.9779 | 332.0000 |
 
 Los reportes de ambas redes incluyen todos los promedios en `results/report_mlp.csv` y `results/report_cnn.csv`.
 
