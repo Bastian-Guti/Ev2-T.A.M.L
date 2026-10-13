@@ -176,10 +176,11 @@ Matriz propuesta para la revisión y exposición del equipo, sujeta a confirmar 
 ## 11. Estructura, reproducción y entrega
 
 | Ruta | Contenido |
+|---|---|
 | `README.md` | Informe técnico |
 | `notebooks/Evaluacion2_CNN_MLP.ipynb` | Desarrollo documentado, ejecutado y con figuras |
-| `presentacion/` | Presentación editable para 10 minutos |
-| `GUIA_DEFENSA.md` | Guion y preguntas cruzadas |
+| `presentacion/` | Presentación para 10 minutos |
+| `GUIA_DEFENSA.md` | Guion ejemplo y preguntas cruzadas |
 
 El notebook verifica dimensiones, no solapamiento de índices, número de parámetros y equivalencia de predicciones tras recargar ambos modelos. Los resultados corresponden a una ejecución efectiva de todas sus celdas en orden. Las semillas facilitan reproducibilidad, sin prometer igualdad bit a bit en hardware diferente.
 
