@@ -183,25 +183,7 @@ Matriz propuesta para la revisión y exposición del equipo, sujeta a confirmar 
 
 El notebook verifica dimensiones, no solapamiento de índices, número de parámetros y equivalencia de predicciones tras recargar ambos modelos. Los resultados corresponden a una ejecución efectiva de todas sus celdas en orden. Las semillas facilitan reproducibilidad, sin prometer igualdad bit a bit en hardware diferente.
 
-**Pendiente externo:** publicar el contenido en el repositorio del equipo y entregar su enlace. No se proporcionó un repositorio de destino. También debe confirmarse la distribución real de responsabilidades y ensayarse la exposición individual.
 
-## 12. Correspondencia con la pauta
-
-| Requisito / ponderación | Evidencia |
-| Preparación CNN, 20% | Notebook §2, controles y particiones en `results/` |
-| Diseño e implementación, 30% | Notebook §3–4, arquitectura, justificaciones y modelos |
-| Comparación CNN/MLP, 20% | Notebook §6, tablas, curvas, parámetros, tiempos y generalización |
-| Evaluación y errores, 30% | Notebook §5 y §7–9, reportes, matrices, errores y activaciones |
-| Informe Markdown | Este README |
-| Matriz de responsabilidades | §10, propuesta que el equipo debe confirmar |
-| Notebook ejecutable | Notebook y dependencias fijadas |
-| Presentación 10 minutos | PPTX, notas y guía oral |
-| Sin capas extra de regularización | Arquitectura verificable de ambos modelos |
-| Enlace de repositorio | Pendiente de publicación por el equipo |
-| Defensa individual: claridad 30%, preguntas 70% | Guía y ensayo personal; no sustituibles por archivos |
-
-No se puede garantizar una calificación: la presentación individual y el cumplimiento de la entrega dependen del grupo.
-
-## 13. Fuentes utilizadas
+## 12. Fuentes utilizadas
 
 - Tablas y figuras de esta entrega: ejecución propia del notebook.
