@@ -187,18 +187,10 @@ Matriz propuesta para la revisión y exposición del equipo, sujeta a confirmar 
 ## 11. Estructura, reproducción y entrega
 
 | Ruta | Contenido |
-|---|---|
 | `README.md` | Informe técnico |
 | `notebooks/Evaluacion2_CNN_MLP.ipynb` | Desarrollo documentado, ejecutado y con figuras |
-| `data/` | CSV originales y procedencia |
-| `models/` | MLP y CNN entrenados en formato Keras |
-| `images/` | Gráficos, ejemplos y activaciones |
-| `results/` | Métricas, historiales, predicciones, matrices, entorno y huellas |
-| `src/entrenar.py` | Versión ejecutable del código |
 | `presentacion/` | Presentación editable para 10 minutos |
-| `docs/GUIA_DEFENSA.md` | Guion y preguntas cruzadas |
-| `docs/ENTREGA_Y_REPOSITORIO.md` | Instrucciones de ejecución y publicación |
-| `docs/referencias/` | Evidencia E1 y pautas aportadas |
+| `GUIA_DEFENSA.md` | Guion y preguntas cruzadas |
 
 Consultar [instrucciones de ejecución](docs/ENTREGA_Y_REPOSITORIO.md). El notebook verifica dimensiones, no solapamiento de índices, número de parámetros y equivalencia de predicciones tras recargar ambos modelos. Los resultados corresponden a una ejecución efectiva de todas sus celdas en orden. Las semillas facilitan reproducibilidad, sin prometer igualdad bit a bit en hardware diferente.
 
@@ -207,7 +199,6 @@ Consultar [instrucciones de ejecución](docs/ENTREGA_Y_REPOSITORIO.md). El noteb
 ## 12. Correspondencia con la pauta
 
 | Requisito / ponderación | Evidencia |
-|---|---|
 | Preparación CNN, 20% | Notebook §2, controles y particiones en `results/` |
 | Diseño e implementación, 30% | Notebook §3–4, arquitectura, justificaciones y modelos |
 | Comparación CNN/MLP, 20% | Notebook §6, tablas, curvas, parámetros, tiempos y generalización |
