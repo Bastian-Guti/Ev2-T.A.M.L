@@ -39,7 +39,6 @@ Fuente: Sign Language MNIST, archivos aportados por el grupo. Dataset original: 
 | O | 14 | 4 | 957 | 239 | 246 |
 | Y | 24 | 5 | 894 | 224 | 332 |
 
-![Ejemplos de las seis clases](images/clases.png)
 
 El train filtrado tiene entre 1.114 y 1.204 muestras por clase. No se requiere remuestreo para equilibrar este subconjunto. El test no tiene exactamente igual soporte por clase, por lo que se informa F1 macro además de accuracy.
 
@@ -51,7 +50,6 @@ Se normaliza una sola vez a float32 dividiendo por 255. No se redimensiona la im
 
 La partición `train_test_split(test_size=0.20, random_state=42, stratify=y)` produce 5.521 imágenes train y 1.381 validación. El test oficial de 1.797 imágenes queda separado del ajuste y monitoreo. Ambos modelos usan las mismas filas y el mismo barajado de lotes. La configuración CNN se fijó antes de evaluar test, sin iterar para mejorar su resultado.
 
-![Distribución de clases](images/distribucion.png)
 
 ### Arquitecturas y decisiones
 **MLP:** arquitectura idéntica a E1, Dense 128 ReLU, Dense 64 ReLU y Dense 6 Softmax (109.126 parámetros). Aplanar no borra valores, pero las capas densas no imponen vecindad ni comparten filtros espaciales.
@@ -80,7 +78,6 @@ Se fijaron semillas en Keras y operaciones deterministas de TensorFlow. La corri
 
 El MLP pasa de accuracy de entrenamiento 0,6564 y val_accuracy 0,8081 a 1,0000 en ambos. La pérdida de validación baja de 0,5615 a 0,001580, con oscilaciones visibles en épocas 8 y 15. La CNN pasa de 0,7140 / 0,9406 a 1,0000 / 1,0000, y val_loss de 0,198536 a 0,000057. Su convergencia es más estable en esta corrida. Se conservaron las 20 épocas prefijadas sin seleccionar por test.
 
-![Curvas completas de aprendizaje](images/curvas.png)
 
 La exactitud de validación perfecta no demuestra ausencia de sobreajuste. En test, el MLP pierde 12,19 pp respecto al train y la CNN 2,73 pp. La diferencia entre validación aleatoria y test oficial sugiere distinta dificultad o similitud con entrenamiento, sin poder establecer su causa. No se observa divergencia sostenida de val_loss de CNN, pero persiste una brecha de generalización. La loss train del historial promedia lotes durante actualizaciones; la tabla siguiente reevalúa todo train con pesos finales, por eso no son necesariamente iguales.
 
@@ -101,7 +98,6 @@ La exactitud de validación perfecta no demuestra ausencia de sobreajuste. En te
 | Latencia mediana (ms) | 2.2328 | 4.7090 |
 | Latencia p95 (ms) | 3.9108 | 6.0583 |
 
-![Comparación de métricas y recursos](images/comparacion.png)
 
 Accuracy es la proporción de aciertos; precision por clase indica cuántas predicciones de esa clase son correctas; recall indica cuántas imágenes reales de esa clase se detectan. F1 es la media armónica de precision y recall. Macro promedia clases por igual y weighted pondera por soporte. Todas las métricas se calculan sobre el mismo test.
 
@@ -134,11 +130,6 @@ La latencia usa 100 llamadas individuales, 10 calentamientos y sincronización p
 
 ## 7. Matrices, predicciones y análisis de errores
 
-![Matrices de confusión](images/matrices.png)
-
-![Aciertos y errores MLP](images/ejemplos_mlp.png)
-
-![Aciertos y errores CNN](images/ejemplos_cnn.png)
 
 ### Lectura concreta de los resultados y figuras
 En la CNN, A y C presentan precision y recall 1,0000. F e Y tienen recall 1,0000, pero reciben falsos positivos de O y K respectivamente. O es la clase más difícil: 212 aciertos de 246, recall 0,8618, aunque su precision es 1,0000 porque ninguna otra clase se predice como O. K presenta 316 aciertos de 331 y recall 0,9547.
@@ -154,11 +145,9 @@ Grad-CAM varía según clase: A e Y muestran focos cerca de bordes inferiores o 
 
 ## 8. Representaciones internas y activación por clase
 
-![Feature Maps de dos capas para seis letras](images/feature_maps.png)
 
 Conv1 usa 16 filtros y salida 26×26. Conv2 usa 32 filtros y salida 11×11. Se muestran los primeros cuatro canales de cada capa para las seis clases, con ejemplos e índices identificables. El campo receptivo crece de 3×3 a 8×8 al considerar el primer pooling. Las capas profundas combinan respuestas sobre regiones mayores.
 
-![Grad-CAM por clase](images/gradcam_clases.png)
 
 Grad-CAM calcula gradientes del logit de cada clase respecto a Conv2, obtiene pesos por promedio espacial, combina canales y aplica ReLU. La salida 11×11 se interpola para superponerla en la entrada. Se calcula para A/C/F/K/O/Y, con una imagen representativa de cada una. Los mapas de filtros y los de clase son conceptos distintos. No se añadió ninguna capa de regularización para obtenerlos.
 
@@ -192,7 +181,7 @@ Matriz propuesta para la revisión y exposición del equipo, sujeta a confirmar 
 | `presentacion/` | Presentación editable para 10 minutos |
 | `GUIA_DEFENSA.md` | Guion y preguntas cruzadas |
 
-Consultar [instrucciones de ejecución](docs/ENTREGA_Y_REPOSITORIO.md). El notebook verifica dimensiones, no solapamiento de índices, número de parámetros y equivalencia de predicciones tras recargar ambos modelos. Los resultados corresponden a una ejecución efectiva de todas sus celdas en orden. Las semillas facilitan reproducibilidad, sin prometer igualdad bit a bit en hardware diferente.
+El notebook verifica dimensiones, no solapamiento de índices, número de parámetros y equivalencia de predicciones tras recargar ambos modelos. Los resultados corresponden a una ejecución efectiva de todas sus celdas en orden. Las semillas facilitan reproducibilidad, sin prometer igualdad bit a bit en hardware diferente.
 
 **Pendiente externo:** publicar el contenido en el repositorio del equipo y entregar su enlace. No se proporcionó un repositorio de destino. También debe confirmarse la distribución real de responsabilidades y ensayarse la exposición individual.
 
@@ -215,9 +204,4 @@ No se puede garantizar una calificación: la presentación individual y el cumpl
 
 ## 13. Fuentes utilizadas
 
-- `docs/referencias/TLY1102-E2.pdf`: instrucciones y detalle de entrega.
-- PDF de rúbrica en `docs/referencias/`: ponderaciones y penalizaciones.
-- Notebook MLP, README y presentación E1 aportados: caso, configuración y resultados históricos.
-- `TLY1102_Entrenamiento_CNN.ipynb` aportado: ejemplo docente revisado para adaptar componentes, sin copiar sus resultados CIFAR-10.
-- CSV del ZIP Sign Language MNIST aportado por el equipo. Fuente declarada en E1: [Kaggle, datamunge](https://www.kaggle.com/datasets/datamunge/sign-language-mnist).
-- Tablas y figuras de esta entrega: ejecución propia del notebook, archivos íntegros en `results/`.
+- Tablas y figuras de esta entrega: ejecución propia del notebook.
